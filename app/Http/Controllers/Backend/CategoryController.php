@@ -20,7 +20,7 @@ class CategoryController extends Controller
 
     public function StoreCategory(Request $request) {
         
-        if ($request->file('category_image')) {
+        // if ($request->file('category_image')) {
             $image = $request->file('category_image');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
             Image::make($image)->resize(120, 120, function ($constraint) {
@@ -41,20 +41,20 @@ class CategoryController extends Controller
             );
 
             return redirect()->route('all.category')->with($notification);
-        } else {
-            Category::create([
-                'category_name' => $request->category_name,
-                'category_slug' => strtolower(str_replace(' ', '-', $request->category_name)),
-                'category_image' => '',
-            ]);
+        // } else {
+        //     Category::create([
+        //         'category_name' => $request->category_name,
+        //         'category_slug' => strtolower(str_replace(' ', '-', $request->category_name)),
+        //         'category_image' => '',
+        //     ]);
 
-            $notification = array(
-                'message' => 'Category Insert Successfully',
-                'alert-type' => 'success'
-            );
+        //     $notification = array(
+        //         'message' => 'Category Insert Successfully',
+        //         'alert-type' => 'success'
+        //     );
 
-            return redirect()->route('all.category')->with($notification);
-        }
+        //     return redirect()->route('all.category')->with($notification);
+        // }
     }
 
     public function EditCategory($id) {

@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,8 +65,8 @@ Route::middleware(['auth','role:vendor'])->group(function() {
 });
 
 
-Route::get('/admin/login', [AdminController::class, 'AdminLogin']);
-Route::get('/vendor/login', [VendorController::class, 'VendorLogin'])->name('vendor.login');
+Route::get('/admin/login', [AdminController::class, 'AdminLogin'])->middleware(RedirectIfAuthenticated::class);
+Route::get('/vendor/login', [VendorController::class, 'VendorLogin'])->name('vendor.login')->middleware(RedirectIfAuthenticated::class);
 
 Route::get('/become/vendor', [VendorController::class, 'BecomeVendor'])->name('become.vendor');
 Route::post('/vendor/register', [VendorController::class, 'VendorRegister'])->name('vendor.register');
@@ -120,9 +121,13 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/all/product' , 'AllProduct')->name('all.product');
         Route::get('/add/product' , 'AddProduct')->name('add.product');
         Route::post('/store/product' , 'StoreProduct')->name('store.product');
-        // Route::get('/edit/category/{id}' , 'EditCategory')->name('edit.category');
-        // Route::post('/update/category' , 'UpdateCategory')->name('update.category');
-        // Route::get('/delete/category/{id}' , 'DeleteCategory')->name('delete.category');
+        Route::get('/edit/product/{id}' , 'EditProduct')->name('edit.product');
+        Route::post('/update/product' , 'UpdateProduct')->name('update.product');
+        Route::post('/update/product/multiimage' , 'UpdateProductMultiimage')->name('update.product.multiimage');
+        Route::get('/product/multiimg/delete/{id}' , 'MultiImageDelete')->name('product.multiimg.delete');
+        Route::get('/product/inactive/{id}' , 'ProductInactive')->name('product.inactive');
+        Route::get('/product/active/{id}' , 'ProductActive')->name('product.active');
+        Route::get('/delete/product/{id}' , 'ProductDelete')->name('delete.product');
     });
 
 });
