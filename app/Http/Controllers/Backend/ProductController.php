@@ -115,16 +115,25 @@ class ProductController extends Controller
             
             $product_id = $request->id;
 
-            $oldImage = $request->old_image;
+            $old_image = Product::findOrFail($product_id);
+
+            $oldImage = $request->old_img;
 
             $image = $request->file('product_thambnail');
-            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(800,800)->save('upload/product_images/thambnail'.$name_gen);
-            $save_url = 'upload/product_images/thambnail'.$name_gen;
 
-            if (file_exists($oldImage)) {
-                unlink($oldImage);
+            if (!empty($image)){
+                
+                $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+                Image::make($image)->resize(800,800)->save('upload/product_images/thambnail'.$name_gen);
+                $save_url = 'upload/product_images/thambnail'.$name_gen;
+
+                if (file_exists($oldImage)) {
+                    unlink($oldImage);
+                }
+            } else {
+                $save_url = $old_image->product_thambnail;
             }
+            
 
             Product::findOrFail($product_id)->update([
                 'brand_id' => $request->brand_id,
@@ -161,22 +170,32 @@ class ProductController extends Controller
 
     public function UpdateProductMultiimage(Request $request) {
 
+        $multi_img_id = $request->id;
+
+        $oldImg = MultiImg::findOrFail($multi_img_id);
+
         $imgs = $request->multi_img;
 
-        foreach($imgs as $id => $img){
-            $imgDel = MultiImg::findOrFail($id);
-            unlink($imgDel->product_image);
+        if(!empty($imgs)){
+            foreach($imgs as $id => $img){
+                $imgDel = MultiImg::findOrFail($id);
+                unlink($imgDel->product_image);
 
-            $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
-            Image::make($img)->resize(800,800)->save('upload/product_images/multi_img'.$make_name);
-            $uploadPath = 'upload/product_images/multi_img'.$make_name;
+                $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+                Image::make($img)->resize(800,800)->save('upload/product_images/multi_img'.$make_name);
+                $uploadPath = 'upload/product_images/multi_img'.$make_name;
 
-            MultiImg::where('id', $id)->update([
-                'product_image' => $uploadPath,
-                'updated_at' => Carbon::now(),
+                MultiImg::where('id', $id)->update([
+                    'product_image' => $uploadPath,
+                    'updated_at' => Carbon::now(),
+                ]);
+            } // end foreach
+        } else{
+            MultiImg::where('id', $multi_img_id)->update([
+                'product_image' => $oldImg->product_image,
             ]);
-        } // end foreach
-
+        }
+        
         $notification = array(
             'message' => 'Product Multi Image Updated Successfully',
             'alert-type' => 'success'

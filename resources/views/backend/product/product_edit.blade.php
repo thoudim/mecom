@@ -65,7 +65,7 @@
 
 								<div class="form-group mb-3">
 									<label for="inputProductTitle" class="form-label">Main Thambnail</label>
-									<input name="product_thambnail" class="form-control" type="file" id="formFile" onChange="mainThamUrl(this)" >
+									<input type="file" name="product_thambnail" class="form-control" id="formFile" onChange="mainThamUrl(this)" >
 
 									<img id="mainThmb" src="{{ (!empty($products->product_thambnail)) ? url($products->product_thambnail) : url('upload/no_image.jpg')}}" alt="Product Thambnail" style="width: 100px; height: 100px;" />
 								</div>
@@ -193,7 +193,10 @@
 
         							@foreach($multiImgs as $key => $img)
         								<tr>
-        									<th>{{ $key+1 }}</th>
+        									<th>
+        										<input type="hidden" name="id" value="{{ $img->id }}">
+        										{{ $key+1 }}
+        									</th>
         									<td> <img src="{{ asset($img->product_image) }}" style="width:70px; height: 40px;"> </td>
         									<td> <input type="file" class="form-group" name="multi_img[{{ $img->id }}]"></td>
         									<td>
