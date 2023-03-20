@@ -7,6 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--favicon-->
 	<link rel="icon" href="{{ asset('adminbackend/assets/images/favicon-32x32.png')}}" type="image/png" />
+	<!-- Tags -->
+	<link href="{{ asset('adminbackend/assets/plugins/input-tags/css/tagsinput.css')}}" rel="stylesheet">
 	<!--plugins-->
 	<link href="{{ asset('adminbackend/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet"/>
 	<link href="{{ asset('adminbackend/assets/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet" />
@@ -37,6 +39,12 @@
 	<link rel="stylesheet" href="{{ asset('adminbackend/assets/css/semi-dark.css')}}" />
 	<link rel="stylesheet" href="{{ asset('adminbackend/assets/css/header-colors.css')}}" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+	<!-- Data Table -->
+	<link href="{{ asset('adminbackend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" />
+	<!-- Data Table End -->
+	<!-- Font Icon -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<!-- Font Icon End -->
 	<title>Vendor Dashboard</title>
 </head>
 
@@ -183,6 +191,7 @@
 		  });
 	  </script>
 	  <script src="{{ asset('adminbackend/assets/js/index.js') }}"></script>
+	  <script src="{{ asset('adminbackend/assets/js/validate.min.js') }}"></script>
 	<!--app JS-->
 	<script src="{{ asset('adminbackend/assets/js/app.js') }}"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -202,6 +211,15 @@
 		$('.timepicker').pickatime()
 	</script>
 	<!-- Date Picker End -->
+	<!-- Data Table -->
+	<script src="{{ asset('adminbackend/assets/plugins/datatable/js/jquery.dataTables.min.js') }}"></script>
+	<script src="{{ asset('adminbackend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js') }}"></script>
+	<!-- Data Table End -->
+	<script>
+		$(document).ready(function() {
+			$('#exmple').DataTable();
+	  	} );
+	</script>
 	
 	<script>
 	 @if(Session::has('message'))
@@ -222,6 +240,23 @@
 	 }
 	 @endif 
 	</script>
+
+	<!-- Sweet Alert -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+ 	<script src="{{ asset('adminbackend/assets/js/code.js') }}"></script>
+	<!-- Sweet Alert End -->
+	<!-- Tags -->
+	<script src="{{ asset('adminbackend/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
+	<!-- Tags End -->
+	<!-- Text Editor -->
+	<script src='https://cdn.tiny.cloud/1/vdqx2klew412up5bcbpwivg1th6nrh3murc6maz8bukgos4v/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+	</script>
+	<script>
+		tinymce.init({
+		  selector: '#mytextarea'
+		});
+	</script>
+	<!-- Text Editor End -->
 
 </body>
 
