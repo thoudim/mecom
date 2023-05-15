@@ -12,6 +12,8 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 use App\Http\Controllers\Backend\VendorProductController;
+use App\Http\Controllers\Backend\SliderController;
+use App\Http\Controllers\Backend\BannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -146,6 +148,26 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/product/inactive/{id}' , 'ProductInactive')->name('product.inactive');
         Route::get('/product/active/{id}' , 'ProductActive')->name('product.active');
         Route::get('/delete/product/{id}' , 'ProductDelete')->name('delete.product');
+    });
+
+    // Slider Route
+    Route::controller(SliderController::class)->group(function() {
+        Route::get('/all/slider' , 'AllSlider')->name('all.slider');
+        Route::get('/add/slider' , 'AddSlider')->name('add.slider');
+        Route::post('/store/slider' , 'StoreSlider')->name('store.slider');
+        Route::get('/edit/slider/{id}' , 'EditSlider')->name('edit.slider');
+        Route::post('/update/slider' , 'UpdateSlider')->name('update.slider');
+        Route::get('/delete/slider/{id}' , 'DeleteSlider')->name('delete.slider');
+    });
+
+    // Banner Route
+    Route::controller(BannerController::class)->group(function() {
+        Route::get('/all/banner' , 'AllBanner')->name('all.banner');
+        Route::get('/add/banner' , 'AddBanner')->name('add.banner');
+        Route::post('/store/banner' , 'StoreBanner')->name('store.banner');
+        Route::get('/edit/banner/{id}' , 'EditBanner')->name('edit.banner');
+        Route::post('/update/banner' , 'UpdateBanner')->name('update.banner');
+        Route::get('/delete/banner/{id}' , 'DeleteBanner')->name('delete.banner');
     });
 
 });
