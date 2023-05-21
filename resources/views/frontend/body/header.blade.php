@@ -1,3 +1,7 @@
+@php
+    $categories = App\Models\Category::orderBy('category_name', 'ASC')->limit(6)->get();
+@endphp
+
 <header class="header-area header-style-1 header-height-2">
     <div class="mobile-promotion">
         <span>Grand opening, <strong>up to 15%</strong> off all items. Only <strong>3 days</strong> left</span>
@@ -199,6 +203,7 @@
             </div>
         </div>
     </div>
+
     <div class="header-bottom header-bottom-bg-color sticky-bar">
         <div class="container">
             <div class="header-wrap header-space-between position-relative">
@@ -214,38 +219,18 @@
                         <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                             <div class="d-flex categori-dropdown-inner">
                                 <ul>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-1.svg') }}" alt="" />Milks and Dairies</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-2.svg') }}" alt="" />Clothing & beauty</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-3.svg') }}" alt="" />Pet Foods & Toy</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-4.svg') }}" alt="" />Baking material</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-5.svg') }}" alt="" />Fresh Fruit</a>
-                                    </li>
+                                    @foreach($categories as $item)
+                                        <li>
+                                            <a href="shop-grid-right.html"> <img src="{{ asset('$item->category_image') }}" alt="" /> {{ $item->category_name }} </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                                 <ul class="end">
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-6.svg') }}" alt="" />Wines & Drinks</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-7.svg') }}" alt="" />Fresh Seafood</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-8.svg') }}" alt="" />Fast food</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-9.svg') }}" alt="" />Vegetables</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset('frontend/assets/imgs/theme/icons/category-10.svg') }}" alt="" />Bread and Juice</a>
-                                    </li>
+                                    @foreach($categories as $item)
+                                        <li>
+                                            <a href="shop-grid-right.html"> <img src="{{ asset('$item->category_image') }}" alt="" /> {{ $item->category_name }} </a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="more_slide_open" style="display: none">
@@ -275,15 +260,15 @@
                         <nav>
                             <ul>
                                 
-                                <li>
-                                    @auth
+                                <!-- <li> -->
+                                    <!-- @auth
                                     <a class="active" href="{{ route('frontend.home_page') }}">Home  </a>
                                     @else 
                                     <a class="active" href="{{ route('home') }}">Home  </a>
-                                    @endauth
+                                    @endauth -->
                                     <!-- <a class="active" href="{{ route('dashboard') }}">Home  </a>                                     -->
-                                </li>
-                                <li>
+                                <!-- </li> -->
+                                <!-- <li>
                                     <a href="page-about.html">About</a>
                                 </li>
                                 <li>
@@ -400,16 +385,11 @@
                                         <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
                                         <li><a href="blog-category-list.html">Blog Category List</a></li>
                                         <li><a href="blog-category-big.html">Blog Category Big</a></li>
-                                        <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li>
+                                        <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li> -->
                                         <li>
-                                            <a href="#">Single Post <i class="fi-rs-angle-right"></i></a>
-                                            <ul class="level-menu level-menu-modify">
-                                                <li><a href="blog-post-left.html">Left Sidebar</a></li>
-                                                <li><a href="blog-post-right.html">Right Sidebar</a></li>
-                                                <li><a href="blog-post-fullwidth.html">No Sidebar</a></li>
-                                            </ul>
+                                            <a class="active" href="index.html">Home </a>
                                         </li>
-                                    </ul>
+                                    <!-- </ul>
                                 </li>
                                 <li>
                                     <a href="#">Pages <i class="fi-rs-angle-down"></i></a>
@@ -426,7 +406,23 @@
                                         <li><a href="page-terms.html">Terms of Service</a></li>
                                         <li><a href="page-404.html">404 Page</a></li>
                                     </ul>
-                                </li>
+                                </li> -->
+
+                                @foreach($categories as $category)
+                                    <li>
+                                        <a href="#">{{ $category->category_name }} <i class="fi-rs-angle-down"></i></a>
+                                    </li>
+                                    @php
+                                        $subcategories = App\Models\SubCategory::where('category_id', $category->id)->orderBy('subcategory_name', 'ASC')->get();
+                                    @endphp
+                                    <ul class="sub-menu">
+                                        @foreach($subcategories as $subcategory)
+                                            <li>
+                                                <a href="#">{{ $subcategory->subcategory_name }}</a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                @endforeach
                                 <li>
                                     <a href="page-contact.html">Contact</a>
                                 </li>

@@ -23,7 +23,7 @@ class BannerController extends Controller
         
         $image = $request->file('banner_image');
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(120, 120, function ($constraint) {
+        Image::make($image)->resize(900, 900, function ($constraint) {
             $constraint->aspectRatio();
             $constraint->upsize();
         })->save('upload/banner_image/'.$name_gen);
@@ -55,7 +55,7 @@ class BannerController extends Controller
         if ($request->file('banner_image')) {
             $image = $request->file('banner_image');
             $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-            Image::make($image)->resize(300, 300, function ($constraint) {
+            Image::make($image)->resize(900, 000, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save('upload/banner_image/'.$name_gen);
