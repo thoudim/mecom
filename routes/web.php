@@ -14,6 +14,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\BannerController;
+use App\Http\Controllers\Frontend\IndexController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,11 @@ use App\Http\Controllers\Backend\BannerController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+// Route::get('/', function(){
+//     return view('frontend.index');
+// });
+Route::get('/', [IndexController::class, 'Index'])->name('home');
 
 Route::middleware(['auth','role:user'])->group(function() {
     Route::get('/home', [UserController::class, 'UserHomePage'])->name('frontend.home_page');
@@ -38,7 +44,6 @@ Route::middleware(['auth','role:user'])->group(function() {
 // Route::get('/dashboard', function () {
 //     return view('index');
 // })->middleware(['auth', 'verified'])->name('dashboard');
-
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 //     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -171,3 +176,8 @@ Route::middleware(['auth','role:admin'])->group(function() {
     });
 
 });
+
+// Frontend Product Details All Route
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
+Route::get('/vendor/details/{id}', [IndexController::class, 'VendorDetails'])->name('vendor.details');
+Route::get('/vendor/all', [IndexController::class, 'VendorAll'])->name('vendor.all');

@@ -179,7 +179,8 @@ class ProductController extends Controller
         if(!empty($imgs)){
             foreach($imgs as $id => $img){
                 $imgDel = MultiImg::findOrFail($id);
-                unlink($imgDel->product_image);
+                // var_dump($imgDel);die;
+                // unlink($imgDel->product_image);
 
                 $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
                 Image::make($img)->resize(800,800)->save('upload/product_images/multi_img'.$make_name);

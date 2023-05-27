@@ -21,15 +21,15 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    /**
-     * Display the login view.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function home()
-    {
-        return view('auth.home');
-    }
+    // /**
+    //  * Display the login view.
+    //  *
+    //  * @return \Illuminate\View\View
+    //  */
+    // public function home()
+    // {
+    //     return view('auth.home');
+    // }
 
     /**
      * Handle an incoming authentication request.

@@ -39,7 +39,7 @@ $products = App\Models\Product::where('status',1)->orderBy('id', 'ASC')->limit(1
                         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
-                                    <a href="shop-product-right.html">
+                                    <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}">
                                         <img class="default-img" src="{{ asset($product->product_thambnail) }}" alt="" />
                                         <!-- <img class="hover-img" src="{{ asset('frontend/assets/imgs/shop/product-1-2.jpg') }}" alt="" /> -->
                                     </a>
@@ -67,7 +67,7 @@ $products = App\Models\Product::where('status',1)->orderBy('id', 'ASC')->limit(1
                                 <div class="product-category">
                                     <a href="shop-grid-right.html">{{ $product['category']['category_name'] }}</a>
                                 </div>
-                                <h2><a href="shop-product-right.html">{{ $product->product_name }}</a></h2>
+                                <h2><a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}">{{ $product->product_name }}</a></h2>
                                 <div class="product-rate-cover">
                                     <div class="product-rate d-inline-block">
                                         <div class="product-rating" style="width: 90%"></div>
@@ -82,10 +82,16 @@ $products = App\Models\Product::where('status',1)->orderBy('id', 'ASC')->limit(1
                                     @endif
                                 </div>
                                 <div class="product-card-bottom">
+                                    @if($product->discount_price == NULL)
                                     <div class="product-price">
-                                        <span>$28.85</span>
-                                        <span class="old-price">$32.8</span>
+                                        <span>${{ $product->selling_price }}</span>
                                     </div>
+                                    @else
+                                    <div class="product-price">
+                                        <span>${{ $product->discount_price }}</span>
+                                        <span class="old-price">${{ $product->selling_price }}</span>
+                                    </div>
+                                    @endif
                                     <div class="add-cart">
                                         <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                     </div>
