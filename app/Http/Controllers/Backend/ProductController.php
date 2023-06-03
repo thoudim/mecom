@@ -24,7 +24,8 @@ class ProductController extends Controller
         $activeVendor = User::where('status', 'active')->where('role', 'vendor')->latest()->get();
         $brands = Brand::latest()->get();
         $categories = Category::latest()->get();
-        return view('backend.product.product_add', compact('brands', 'categories', 'activeVendor'));
+        $subcategory = SubCategory::latest()->get();
+        return view('backend.product.product_add', compact('brands', 'categories', 'activeVendor','subcategory'));
     }
 
     public function StoreProduct(Request $request) {

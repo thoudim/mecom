@@ -134,7 +134,9 @@
 					<label for="inputCollection" class="form-label">Product SubCategory</label>
 					<select name="subcategory_id" class="form-select" id="inputCollection">
 						<option></option>
-						 
+						 @foreach($subcategory as $subcat)
+						<option value="{{ $subcat->id }}">{{ $subcat->subcategory_name }}</option>
+						 @endforeach
 					  </select>
 				  </div>
 

@@ -73,4 +73,43 @@ class IndexController extends Controller
         return view('frontend.vendor.vendor_all', compact('vendors'));
     } // End Method
 
+    public function CatWiseProduct(Request $request, $id, $slug)
+    {
+        $products = Product::where('status', 1)->where('category_id', $id)->orderBy('id','DESC')->get();
+        $categories = Category::orderBy('category_name','ASC')->get();
+
+        $breadcat = Category::where('id', $id)->first();
+
+        $newProduct = Product::orderBy('id','DESC')->limit(3)->get();
+
+        return view('frontend.product.category_view', compact('products','categories','breadcat','newProduct'));
+    } // End Method
+
+    public function SubCatWiseProduct(Request $request, $id, $slug)
+    {
+        $products = Product::where('status', 1)->where('subcategory_id', $id)->orderBy('id','DESC')->get();
+        $categories = Category::orderBy('category_name','ASC')->get();
+        $breadsubcat = SubCategory::where('id', $id)->first();
+        $newProduct = Product::orderBy('id','DESC')->limit(3)->get();
+
+        return view('frontend.product.subcategory_view', compact('products','categories','breadsubcat','newProduct'));
+    } // End Method
+
+    public function ProductViewAjax($id)
+    {
+        $product = Product::with('category','brand')->findOrFail($id);
+        $color = $product->product_color;
+        $product_color = explode(',', $color);
+
+        $size = $product->product_size;
+        $product_size = explode(',', $size);
+
+        return response()->json(array(
+            'product' => $product,
+            'color' => $product_color,
+            'size' => $product_size,
+        ));
+
+    } // End Method
+
 }
