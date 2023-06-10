@@ -16,6 +16,8 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\User\WishlistController;
+use App\Http\Controllers\User\CompareController;
 
 /*
 |--------------------------------------------------------------------------
@@ -192,5 +194,33 @@ Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 // Get data from mini cart
 Route::get('/product/mini/cart', [CartController::class, 'AddMiniCart']);
 Route::get('/minicart/product/remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
-/// Add to cart store data For Product Details Page 
+// Add to cart store data For Product Details Page 
 Route::post('/dcart/data/store/{id}', [CartController::class, 'AddToCartDetails']);
+// Add to Wishlist
+Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'AddToWishlist']);
+// Add to Compare
+Route::post('/add-to-compare/{product_id}', [CompareController::class, 'AddToCompare']);
+
+/// User All Route
+Route::middleware(['auth','role:user'])->group(function(){
+Route::controller(WishlistController::class)->group(function(){
+    Route::get('/wishlist','AllWishlist')->name('wishlist');
+    Route::get('/get-wishlist-product','GetWishlistProduct');
+    Route::get('/wishlist-remove/{id}','WishlistRemove');
+});
+// Compare All Route
+Route::controller(CompareController::class)->group(function(){
+    Route::get('/compare','AllCompare')->name('compare');
+    Route::get('/get-compare-product/','GetCompareProduct');
+    Route::get('/compare-remove/{id}','CompareRemove');
+});
+// Cart All Route
+Route::controller(CartController::class)->group(function(){
+    Route::get('/mycart','MyCart')->name('mycart');
+    Route::get('/get-cart-product','GetCartProduct');
+    Route::get('/cart-remove/{rowId}','CartRemove');
+    Route::get('/cart-decrement/{rowId}','CartDecrement');
+    Route::get('/cart-Increment/{rowId}','CartIncrement');
+});
+
+}); /// End group User middleware
