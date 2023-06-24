@@ -3,6 +3,8 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<script src="{{ asset('frontend/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
+
 <div class="page-content"> 
 	<!--breadcrumb-->
 	<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
