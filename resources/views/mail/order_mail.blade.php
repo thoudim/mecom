@@ -314,27 +314,27 @@ ul.social li{
 	      <tr>
 	      	<table class="bg_white" role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
 	      		<tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
-				    <th width="20%" style="text-align:left; padding: 0 1em; color: #000; padding-bottom: 20px">Name</th>
-				    <th width="20%" style="text-align:right; padding: 0 1em; color: #000; padding-bottom: 20px">Invoice No</th>
-				    <th width="20%" style="text-align:left; padding: 0 1em; color: #000; padding-bottom: 20px">Amount</th>
-				    <th width="20%" style="text-align:right; padding: 0 1em; color: #000; padding-bottom: 20px">Total Amount</th>
+				    <th width="10%" style="text-align:left; padding: 0 1em; color: #000; padding-bottom: 20px">Name</th>
+				    <th width="30%" style="text-align:left; padding: 0 1em; color: #000; padding-bottom: 20px">Invoice No</th>
+				    <th width="30%" style="text-align:left; padding: 0 1em; color: #000; padding-bottom: 20px">Amount</th>
+				    <th width="20%" style="text-align:left; padding: 0 1em; color: #000; padding-bottom: 20px">Total Amount</th>
 				</tr>
 				<tr style="border-bottom: 1px solid rgba(0,0,0,.05);">
-				  	<td valign="middle" width="20%" style="text-align:left; padding: 0 1em;">
+				  	<td valign="middle" width="10%" style="text-align:left; padding: 0 1em;">
 				  		<div class="product-entry">
 				  			<div class="text">
-				  				<h3>{{ $order['name'] }}<</h3>
+				  				<h3>{{ $order['name'] }}</h3>
 				  			</div>
 				  		</div>
 				  	</td>
-				  	<td valign="middle" width="20%" style="text-align:left; padding: 0 1em;">
+				  	<td valign="middle" width="30%" style="text-align:left; padding: 0 1em;">
 				  		<div class="product-entry">
 				  			<div class="text">
-				  				<h3>{{ $order['invoice_no'] }}<</h3>
+				  				<h3>{{ $order['invoice_no'] }}</h3>
 				  			</div>
 				  		</div>
 				  	</td>
-				  	<td valign="middle" width="20%" style="text-align:left; padding: 0 1em;">
+				  	<td valign="middle" width="30%" style="text-align:left; padding: 0 1em;">
 				  		<span class="price" style="color: #000; font-size: 20px;">{{ $order['email'] }}</span>
 				  	</td>
 				  	<td valign="middle" width="20%" style="text-align:left; padding: 0 1em;">

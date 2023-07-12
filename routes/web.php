@@ -13,6 +13,8 @@ use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ShippingAreaController;
+use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\VendorOrderController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
@@ -93,6 +95,13 @@ Route::middleware(['auth','role:vendor'])->group(function() {
         Route::get('/vendor/delete/product/{id}' , 'VendorProductDelete')->name('vendor.delete.product');
 
         Route::get('/vendor/subcategory/ajax/{category_id}', 'VendorGetSubCategory');
+    });
+
+    // Vendor Order Route 
+    Route::controller(VendorOrderController::class)->group(function(){
+        Route::get('/vendor/order' , 'VendorOrder')->name('vendor.order');
+
+
     });
 });
 
@@ -226,6 +235,11 @@ Route::middleware(['auth','role:admin'])->group(function() {
 
         Route::get('/district/ajax/{division_id}' , 'GetDistrict');
 
+    });
+
+    // Admin Order All Route 
+    Route::controller(OrderController::class)->group(function(){
+        Route::get('/pending/order' , 'PendingOrder')->name('pending.order');
     }); 
 
 }); // Admin End Middleware

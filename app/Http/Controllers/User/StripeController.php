@@ -21,31 +21,21 @@ class StripeController extends Controller
         if(Session::has('coupon')){
             $total_amount = Session::get('coupon')['total_amount'];
         }else{
-            $total_amount = round(Cart::total);
+            $total_amount = round(Cart::total());
         }
 
         \Stripe\Stripe::setApiKey('sk_test_51NKilADjVz07UFaoAzxltkN5l5wJQxsgY41QF7IgswWVtuEP59hrZ7NjwJpFKa5V1dXmb4zRaL6sPCbxonHacfJe00Ux030M04');
 
-        // $token = $_POST['stripeToken'];
-        // if (isset($_POST['stripeToken'])){
+        $token = $_POST['stripeToken'];
 
-        //     $token = $_POST['stripeToken'];
-
-        //     // Create a Customer
-        //     $customer = \Stripe\Customer::create(array(
-        //       "source" => $token,
-        //       "description" => "Example customer")
-        //     );
-
-            $charge = \Stripe\Charge::create([
-                'amount' => $total_amount*100,
-                'currency' => 'usd',
-                'description' => 'Easy Multi Vendor Shop',
-                'metadata' => ['order_id' => uniqid()],
-                'source' => $token,
-                // "customer" => $customer->id,
-            ]);
-        // }
+        $charge = \Stripe\Charge::create([
+            'amount' => $total_amount*100,
+            'currency' => 'usd',
+            'description' => 'Easy Multi Vendor Shop',
+            'source' => $token,
+            'metadata' => ['order_id' => uniqid()],
+            // "customer" => $customer->id,
+        ]);
 
         // dd('$charge');
 
@@ -91,16 +81,17 @@ class StripeController extends Controller
         // End Send Email
 
         $carts = Cart::content();
+        // dd($carts);
         foreach($carts as $cart){
             OrderItem::insert([
                 'order_id' => $order_id,
                 'product_id' => $cart->id,
-                'vendor_id' => $cart->options->vendor,
+                'vendor_id' => $cart->options->vendor_id,
                 'color' => $cart->options->color,
                 'size' => $cart->options->size,
                 'qty' => $cart->qty,
                 'price' => $cart->price,
-                'order_id' => Carbon::now(),
+                'created_at' => Carbon::now(),
             ]);
         } // End Foreach
 
@@ -124,7 +115,7 @@ class StripeController extends Controller
         if(Session::has('coupon')){
             $total_amount = Session::get('coupon')['total_amount'];
         }else{
-            $total_amount = round(Cart::total);
+            $total_amount = round(Cart::total());
         }
 
         $order_id = Order::insertGetId([
@@ -159,12 +150,12 @@ class StripeController extends Controller
             OrderItem::insert([
                 'order_id' => $order_id,
                 'product_id' => $cart->id,
-                'vendor_id' => $cart->options->vendor,
+                'vendor_id' => $cart->options->vendor_id,
                 'color' => $cart->options->color,
                 'size' => $cart->options->size,
                 'qty' => $cart->qty,
                 'price' => $cart->price,
-                'order_id' => Carbon::now(),
+                'created_at' => Carbon::now(),
             ]);
         } // End Foreach
 

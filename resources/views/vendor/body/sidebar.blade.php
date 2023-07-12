@@ -39,11 +39,16 @@
 		</li>
 		
 		<li>
-			<a href="https://codervent.com/rukada/documentation/index.html" target="_blank">
+			<a href="javascript:;" class="has-arrow">
 				<div class="parent-icon"><i class="bx bx-folder"></i>
 				</div>
 				<div class="menu-title">All Order</div>
 			</a>
+			<ul>
+				<li>
+					<a href="{{ route('vendor.order') }}"><i class="bx bx-right-arrow-alt"></i>Vendor Order</a>
+				</li>
+			</ul>
 		</li>
 		<li>
 			<a href="javascript:;" class="has-arrow">
