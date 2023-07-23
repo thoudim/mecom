@@ -24,6 +24,7 @@ use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CompareController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
+use App\Http\Controllers\User\AllUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -240,6 +241,10 @@ Route::middleware(['auth','role:admin'])->group(function() {
     // Admin Order All Route 
     Route::controller(OrderController::class)->group(function(){
         Route::get('/pending/order' , 'PendingOrder')->name('pending.order');
+        Route::get('/admin/order/details/{order_id}' , 'AdminOrderDetails')->name('admin.order.details');
+        Route::get('/admin/confirmed/order' , 'AdminConfirmedOrder')->name('admin.confirmed.order');
+        Route::get('/admin/processing/order' , 'AdminProcessingOrder')->name('admin.processing.order');
+        Route::get('/admin/delivered/order' , 'AdminDeliveredOrder')->name('admin.delivered.order');
     }); 
 
 }); // Admin End Middleware
@@ -310,6 +315,15 @@ Route::controller(StripeController::class)->group(function(){
     Route::post('/stripe/order','StripeOrder')->name('stripe.order');
     Route::post('/cash/order','CashOrder')->name('cash.order');
 });
+
+// User Dashboard All Route 
+Route::controller(AllUserController::class)->group(function(){
+    Route::get('/user/account/page' , 'UserAccount')->name('user.account.page');
+    Route::get('/user/change/password' , 'UserChangePassword')->name('user.change.password');
+    Route::get('/user/order/page' , 'UserOrderPage')->name('user.order.page');
+    Route::get('/user/order_details/{order_id}' , 'UserOrderDetails');
+    Route::get('/user/invoice_download/{order_id}' , 'UserOrderInvoice');
+}); 
 
 
 }); /// End group User middleware
