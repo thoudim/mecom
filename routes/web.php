@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\VendorOrderController;
 use App\Http\Controllers\Backend\BannerController;
+use App\Http\Controllers\Backend\ReturnController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 use App\Http\Controllers\Frontend\IndexController;
@@ -101,8 +102,9 @@ Route::middleware(['auth','role:vendor'])->group(function() {
     // Vendor Order Route 
     Route::controller(VendorOrderController::class)->group(function(){
         Route::get('/vendor/order' , 'VendorOrder')->name('vendor.order');
-
-
+        Route::get('/vendor/return/order' , 'VendorReturnOrder')->name('vendor.return.order');
+        Route::get('/vendor/complete/return/order' , 'VendorCompleteReturnOrder')->name('vendor.complete.return.order');
+        Route::get('/vendor/order/details/{order_id}' , 'VendorOrderDetails')->name('vendor.order.details');
     });
 });
 
@@ -245,7 +247,18 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/admin/confirmed/order' , 'AdminConfirmedOrder')->name('admin.confirmed.order');
         Route::get('/admin/processing/order' , 'AdminProcessingOrder')->name('admin.processing.order');
         Route::get('/admin/delivered/order' , 'AdminDeliveredOrder')->name('admin.delivered.order');
-    }); 
+        Route::get('/pending/confirm/{order_id}' , 'PendingToConfirm')->name('pending-confirm');
+        Route::get('/confirm/processing/{order_id}' , 'ConfirmToProcess')->name('confirm-processing');
+        Route::get('/processing/delivered/{order_id}' , 'ProcessToDelivered')->name('processing-delivered');
+        Route::get('/admin/invoice/download/{order_id}' , 'AdminInvoiceDownload')->name('admin.invoice.download');
+    });
+
+     // Return Order All Route 
+    Route::controller(ReturnController::class)->group(function(){
+        Route::get('/return/request' , 'ReturnRequest')->name('return.request');
+        Route::get('/return/request/approved/{order_id}' , 'ReturnRequestApproved')->name('return.request.approved');
+        Route::get('/complete/return/request' , 'CompleteReturnRequest')->name('complete.return.request');
+    });
 
 }); // Admin End Middleware
 
@@ -323,6 +336,8 @@ Route::controller(AllUserController::class)->group(function(){
     Route::get('/user/order/page' , 'UserOrderPage')->name('user.order.page');
     Route::get('/user/order_details/{order_id}' , 'UserOrderDetails');
     Route::get('/user/invoice_download/{order_id}' , 'UserOrderInvoice');
+    Route::post('/return/order/{order_id}' , 'ReturnOrder')->name('return.order');
+    Route::get('/return/order/page' , 'ReturnOrderPage')->name('return.order.page');
 }); 
 
 
