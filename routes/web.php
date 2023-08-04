@@ -17,6 +17,9 @@ use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\VendorOrderController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\ReturnController;
+use App\Http\Controllers\Backend\ReportController;
+use App\Http\Controllers\Backend\ActiveUserController;
+use App\Http\Controllers\Backend\BlogController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 use App\Http\Controllers\Frontend\IndexController;
@@ -253,11 +256,47 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/admin/invoice/download/{order_id}' , 'AdminInvoiceDownload')->name('admin.invoice.download');
     });
 
-     // Return Order All Route 
+    // Return Order All Route 
     Route::controller(ReturnController::class)->group(function(){
         Route::get('/return/request' , 'ReturnRequest')->name('return.request');
         Route::get('/return/request/approved/{order_id}' , 'ReturnRequestApproved')->name('return.request.approved');
         Route::get('/complete/return/request' , 'CompleteReturnRequest')->name('complete.return.request');
+    });
+
+    // Report All Route 
+    Route::controller(ReportController::class)->group(function(){
+        Route::get('/report/view' , 'ReportView')->name('report.view');
+        Route::post('/search/by/date' , 'SearchByDate')->name('search-by-date');
+        Route::post('/search/by/month' , 'SearchByMonth')->name('search-by-month');
+        Route::post('/search/by/year' , 'SearchByYear')->name('search-by-year');
+        Route::get('/order/by/user' , 'OrderByUser')->name('order.by.user');
+        Route::post('/search/by/user' , 'SearchByUser')->name('search-by-user');
+    });
+
+    // Active user and vendor All Route
+    Route::controller(ActiveUserController::class)->group(function(){
+        Route::get('/all/user' , 'AllUser')->name('all-user');
+        Route::get('/all/vendor' , 'AllVendor')->name('all-vendor');
+    });
+
+    // Blog Category All Route
+    Route::controller(BlogController::class)->group(function(){
+        Route::get('/admin/blog/category' , 'AllBlogCategory')->name('admin.blog.category');
+        Route::get('/admin/add/blog/category' , 'AddBlogCategory')->name('add.blog.category');
+        Route::post('/admin/store/blog/category' , 'StoreBlogCategory')->name('store.blog.category');
+        Route::get('/admin/edit/blog/category/{id}' , 'EditBlogCategory')->name('edit.blog.category');
+        Route::post('/admin/update/blog/category' , 'UpdateBlogCategory')->name('update.blog.category');
+        Route::get('/admin/delete/blog/category/{id}' , 'DeleteBlogCategory')->name('delete.blog.category');
+    });
+
+    // Blog Post All Route
+    Route::controller(BlogController::class)->group(function(){
+        Route::get('/admin/blog/post' , 'AllBlogPost')->name('admin.blog.post');
+        Route::get('/admin/add/blog/post' , 'AddBlogPost')->name('add.blog.post');
+        Route::post('/admin/store/blog/post' , 'StoreBlogPost')->name('store.blog.post');
+        Route::get('/admin/edit/blog/post/{id}' , 'EditBlogPost')->name('edit.blog.post');
+        Route::post('/admin/update/blog/post' , 'UpdateBlogPost')->name('update.blog.post');
+        Route::get('/admin/delete/blog/post/{id}' , 'DeleteBlogPost')->name('delete.blog.post');
     });
 
 }); // Admin End Middleware
