@@ -126,6 +126,11 @@ Route::post('/vendor/register', [VendorController::class, 'VendorRegister'])->na
 
 
 Route::middleware(['auth','role:admin'])->group(function() {
+
+    // Frontend Home page
+    Route::get('/home', [UserController::class, 'UserHomePage'])->name('frontend.home_page');
+    // End Frontend Home page
+
     // Brand Route
     Route::controller(BrandController::class)->group(function() {
         Route::get('/all/brand' , 'AllBrand')->name('all.brand');
@@ -314,6 +319,12 @@ Route::middleware(['auth','role:admin'])->group(function() {
     });
 
 }); // Admin End Middleware
+
+Route::middleware(['auth','role:vendor'])->group(function() {
+    // Frontend Home page
+    Route::get('/home', [UserController::class, 'UserHomePage'])->name('frontend.home_page');
+    // End Frontend Home page
+});
 
 // Frontend Product Details All Route
 Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);

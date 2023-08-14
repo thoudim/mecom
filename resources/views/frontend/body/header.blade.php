@@ -375,9 +375,16 @@
                                         <li><a href="blog-category-list.html">Blog Category List</a></li>
                                         <li><a href="blog-category-big.html">Blog Category Big</a></li>
                                         <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li> -->
+                                        @auth
                                         <li>
-                                            <a class="active" href="{{ url('/') }}">Home </a>
+                                            <a class="active" href="{{ route('frontend.home_page') }}">Home </a>
                                         </li>
+                                        @else
+                                        <li>
+                                            <a class="active" href="{{ route('home') }}">Home </a>
+                                        </li>
+                                        @endauth
+                            
                                     <!-- </ul>
                                 </li>
                                 <li>
