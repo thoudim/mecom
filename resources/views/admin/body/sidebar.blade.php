@@ -256,22 +256,21 @@
 				</li>			
 			</ul>
 		</li>
-		<!-- <li>
+		<li>
 			<a class="has-arrow" href="javascript:;">
-				<div class="parent-icon"> <i class="bx bx-donate-blood"></i>
+				<div class="parent-icon"> <i class="bx bx-category"></i>
 				</div>
-				<div class="menu-title">Icons</div>
+				<div class="menu-title">Setting Manage</div>
 			</a>
 			<ul>
-				<li> <a href="icons-line-icons.html"><i class="bx bx-right-arrow-alt"></i>Line Icons</a>
+				<li> <a href="{{ route('site.setting') }}"><i class="bx bx-right-arrow-alt"></i>Site Setting</a>
 				</li>
-				<li> <a href="icons-boxicons.html"><i class="bx bx-right-arrow-alt"></i>Boxicons</a>
-				</li>
-				<li> <a href="icons-feather-icons.html"><i class="bx bx-right-arrow-alt"></i>Feather Icons</a>
+				<li> <a href="{{ route('seo.setting') }}"><i class="bx bx-right-arrow-alt"></i>Seo Setting</a>
 				</li>
 			</ul>
 		</li>
-		<li class="menu-label">Forms & Tables</li>
+
+		<!-- <li class="menu-label">Forms & Tables</li>
 		<li>
 			<a class="has-arrow" href="javascript:;">
 				<div class="parent-icon"><i class='bx bx-message-square-edit'></i>
@@ -380,8 +379,19 @@
 				</div>
 				<div class="menu-title">Pricing</div>
 			</a>
+		</li> -->
+		<li>
+			<a class="has-arrow" href="javascript:;">
+				<div class="parent-icon"><i class="bx bx-category"></i>
+				</div>
+				<div class="menu-title">Stock Manage</div>
+			</a>
+			<ul>
+				<li> <a href="{{ route('product.stock') }}"><i class="bx bx-right-arrow-alt"></i>Product Stock</a>
+				</li>
+			</ul>
 		</li>
-		<li class="menu-label">Charts & Maps</li>
+		<!-- <li class="menu-label">Charts & Maps</li>
 		<li>
 			<a class="has-arrow" href="javascript:;">
 				<div class="parent-icon"><i class="bx bx-line-chart"></i>
@@ -396,8 +406,8 @@
 				<li> <a href="charts-highcharts.html"><i class="bx bx-right-arrow-alt"></i>Highcharts</a>
 				</li>
 			</ul>
-		</li>
-		<li>
+		</li> -->
+		<!-- <li>
 			<a class="has-arrow" href="javascript:;">
 				<div class="parent-icon"><i class="bx bx-map-alt"></i>
 				</div>
@@ -443,7 +453,7 @@
 				</div>
 				<div class="menu-title">Support</div>
 			</a>
-		</li> -->
+		</li>  -->
 	</ul>
 	<!--end navigation-->
 </div>

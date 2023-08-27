@@ -1,6 +1,10 @@
 @extends('frontend.master_dashboard')
 @section('main')
 
+@section('title')
+    Checkout Page
+@endsection
+
 <script src="{{ asset('frontend/assets/js/vendor/jquery-3.6.0.min.js') }}"></script>
 
 <div class="page-header breadcrumb-wrap">

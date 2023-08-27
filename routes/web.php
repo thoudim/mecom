@@ -20,6 +20,7 @@ use App\Http\Controllers\Backend\ReturnController;
 use App\Http\Controllers\Backend\ReportController;
 use App\Http\Controllers\Backend\ActiveUserController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 use App\Http\Controllers\Frontend\IndexController;
@@ -186,6 +187,10 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/product/inactive/{id}' , 'ProductInactive')->name('product.inactive');
         Route::get('/product/active/{id}' , 'ProductActive')->name('product.active');
         Route::get('/delete/product/{id}' , 'ProductDelete')->name('delete.product');
+
+        // For Product Stock
+        Route::get('/product/stock' , 'ProductStock')->name('product.stock');
+
     });
 
     // Slider Route
@@ -318,6 +323,15 @@ Route::middleware(['auth','role:admin'])->group(function() {
         Route::get('/review/delete/{id}', 'ReviewDelete')->name('review.delete');
     });
 
+    // Site Setting All Route
+    Route::controller(SiteSettingController::class)->group(function(){
+        Route::get('/site/setting', 'SiteSetting')->name('site.setting');
+        Route::post('/site/setting/update', 'SiteSettingUpdate')->name('site.setting.update');
+        Route::get('/seo/setting', 'SeoSetting')->name('seo.setting');
+        Route::post('/seo/setting/update', 'SeoSettingUpdate')->name('seo.setting.update');
+    });
+
+
 }); // Admin End Middleware
 
 Route::middleware(['auth','role:vendor'])->group(function() {
@@ -409,6 +423,10 @@ Route::controller(AllUserController::class)->group(function(){
     Route::get('/user/invoice_download/{order_id}' , 'UserOrderInvoice');
     Route::post('/return/order/{order_id}' , 'ReturnOrder')->name('return.order');
     Route::get('/return/order/page' , 'ReturnOrderPage')->name('return.order.page');
+
+    // Order Tracking
+    Route::get('/user/track/order' , 'UserTrackOrder')->name('user.track.order');
+    Route::post('/order/tracking' , 'OrderTracking')->name('order.tracking');
 });
 
 // Review All Route
