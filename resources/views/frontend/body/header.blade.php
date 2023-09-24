@@ -72,7 +72,8 @@
                 </div>
                 <div class="header-right">
                     <div class="search-style-2">
-                        <form action="#">
+                        <form action="{{ route('product.search') }}" method="post">
+                            @csrf
                             <select class="select-active">
                                 <option>All Categories</option>
                                 <option>Milks and Dairies</option>
@@ -86,7 +87,9 @@
                                 <option>Noodles & Rice</option>
                                 <option>Ice cream</option>
                             </select>
-                            <input type="text" placeholder="Search for items..." />
+                            <!-- <input onfocus="search_result_show()" onblur="search_result_hide()" name="search" id="search" placeholder="Search for items..." /> -->
+                            <input name="search" placeholder="Search for items..." />
+                            <!-- <div id="searchProducts"></div> -->
                         </form>
                     </div>
                     <div class="header-action-right">
@@ -205,7 +208,7 @@
                 <div class="header-nav d-none d-lg-flex">
                     <div class="main-categori-wrap d-none d-lg-block">
                         <a class="categories-button-active" href="#">
-                            <span class="fi-rs-apps"></span>   All Categories
+                            <span class="fi-rs-apps"></span> All Categories
                             <i class="fi-rs-angle-down"></i>
                         </a>
                         <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
@@ -260,18 +263,33 @@
                                     @endauth -->
                                     <!-- <a class="active" href="{{ route('dashboard') }}">Home  </a>                                     -->
                                 <!-- </li> -->
+                                @auth
+                                <li>
+                                    <a class="active" href="{{ route('frontend.home_page') }}">Home </a>
+                                </li>
+                                @else
+                                <li>
+                                    <a class="active" href="{{ route('home') }}">Home </a>
+                                </li>
+                                @endauth
                                 <!-- <li>
                                     <a href="page-about.html">About</a>
-                                </li>
+                                </li> -->
                                 <li>
-                                    <a href="shop-grid-right.html">Shop <i class="fi-rs-angle-down"></i></a>
+                                    @foreach($categories as $category)
+                                    <a href="{{ url('product/category/'.$category->id.'/'.$category->category_slug) }}">{{ $category->category_name }} <i class="fi-rs-angle-down"></i></a>
+
+                                    @php
+                                        $subcategories = App\Models\SubCategory::where('category_id', $category->id)->orderBy('subcategory_name', 'ASC')->get();
+                                    @endphp
+
                                     <ul class="sub-menu">
-                                        <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
-                                        <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
-                                        <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
-                                        <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
-                                        <li><a href="shop-fullwidth.html">Shop - Wide</a></li>
+                                        @foreach($subcategories as $subcategory)
                                         <li>
+                                            <a href="{{ url('product/subcategory/'.$subcategory->id.'/'.$subcategory->subcategory_slug) }}">{{ $subcategory->subcategory_name }}</a>
+                                        </li>
+                                        @endforeach
+                                        <!-- <li>
                                             <a href="#">Single Product <i class="fi-rs-angle-right"></i></a>
                                             <ul class="level-menu">
                                                 <li><a href="shop-product-right.html">Product – Right Sidebar</a></li>
@@ -295,10 +313,11 @@
                                                 <li><a href="shop-invoice-5.html">Shop Invoice 5</a></li>
                                                 <li><a href="shop-invoice-6.html">Shop Invoice 6</a></li>
                                             </ul>
-                                        </li>
+                                        </li> -->
                                     </ul>
+                                    @endforeach
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
                                     <ul class="sub-menu">
                                         <li><a href="vendors-grid.html">Vendors Grid</a></li>
@@ -308,8 +327,8 @@
                                         <li><a href="vendor-dashboard.html">Vendor Dashboard</a></li>
                                         <li><a href="vendor-guide.html">Vendor Guide</a></li>
                                     </ul>
-                                </li>
-                                <li class="position-static">
+                                </li> -->
+                                <!-- <li class="position-static">
                                     <a href="#">Mega menu <i class="fi-rs-angle-down"></i></a>
                                     <ul class="mega-menu">
                                         <li class="sub-mega-menu sub-mega-menu-width-22">
@@ -377,18 +396,10 @@
                                         <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
                                         <li><a href="blog-category-list.html">Blog Category List</a></li>
                                         <li><a href="blog-category-big.html">Blog Category Big</a></li>
-                                        <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li> -->
-                                        @auth
-                                        <li>
-                                            <a class="active" href="{{ route('frontend.home_page') }}">Home </a>
-                                        </li>
-                                        @else
-                                        <li>
-                                            <a class="active" href="{{ route('home') }}">Home </a>
-                                        </li>
-                                        @endauth
+                                        <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li>
+                                        
                             
-                                    <!-- </ul>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="#">Pages <i class="fi-rs-angle-down"></i></a>
@@ -406,22 +417,6 @@
                                         <li><a href="page-404.html">404 Page</a></li>
                                     </ul>
                                 </li> -->
-
-                                @foreach($categories as $category)
-                                    <li>
-                                        <a href="{{ url('product/category/'.$category->id.'/'.$category->category_slug) }}">{{ $category->category_name }} <i class="fi-rs-angle-down"></i></a>
-                                    </li>
-                                    @php
-                                        $subcategories = App\Models\SubCategory::where('category_id', $category->id)->orderBy('subcategory_name', 'ASC')->get();
-                                    @endphp
-                                    <ul class="sub-menu">
-                                        @foreach($subcategories as $subcategory)
-                                            <li>
-                                                <a href="{{ url('product/subcategory/'.$subcategory->id.'/'.$subcategory->subcategory_slug) }}">{{ $subcategory->subcategory_name }}</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                @endforeach
                                 <li>
                                     <a href="{{ route('home.blog')}}">Blog</a>
                                 </li>
@@ -499,6 +494,29 @@
     </div>
 </header>
 <!-- End Header  -->
+
+<style>
+    #searchProducts{
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: #fff;
+        z-index: 999;
+        border-radius: 8px;
+        margin-top: 5px;
+    }
+</style>
+
+<!-- <script>
+    function search_result_show(){
+        $("#searchProducts").slideDown();
+    }
+
+    function search_result_hide(){
+        $("searchProducts").slideUp();
+    }
+</script> -->
 
 <div class="mobile-header-active mobile-header-wrapper-style">
     <div class="mobile-header-wrapper-inner">
