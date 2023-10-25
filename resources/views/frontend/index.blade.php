@@ -128,10 +128,11 @@
 <section class="product-tabs section-padding position-relative">
     <div class="container">
         <div class="section-title style-2 wow animate__animated animate__fadeIn">
-            @if($skip_category_2 == 0)
+            
+            @if($skip_category_1->id == 0)
             <h3>T-shirt Category </h3>
             @else
-            <h3>{{ $skip_category_2->category_name }} Category </h3>
+            <h3>{{ $skip_category_1->category_name }} Category </h3>
             @endif
            
         </div>
@@ -139,7 +140,7 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                 <div class="row product-grid-4">
-                    @foreach($skip_product_2 as $product)
+                    @foreach($skip_product_1 as $product)
                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
                             <div class="product-img-action-wrap">
@@ -216,10 +217,10 @@
 <section class="product-tabs section-padding position-relative">
     <div class="container">
         <div class="section-title style-2 wow animate__animated animate__fadeIn">
-            @if($skip_category_7 == 0)
+            @if($skip_category_2->id == 0)
             <h3>Computer Category </h3>
             @else
-            <h3>{{ $skip_category_7->category_name }} Category </h3>
+            <h3>{{ $skip_category_2->category_name }} Category </h3>
             @endif
            
         </div>
@@ -227,7 +228,7 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
                 <div class="row product-grid-4">
-                    @foreach($skip_product_7 as $product)
+                    @foreach($skip_product_2 as $product)
                     <div class="col-lg-1-5 col-md-4 col-12 col-sm-6">
                         <div class="product-cart-wrap mb-30 wow animate__animated animate__fadeIn" data-wow-delay=".1s">
                             <div class="product-img-action-wrap">

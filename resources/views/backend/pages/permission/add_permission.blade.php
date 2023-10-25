@@ -45,6 +45,7 @@
 										<select name="group_name" class="form-select mb-3" aria-label="Default select example">
 										<option selected="">Open this select Group</option>
 										<option value="brand">Brand</option>
+										<option value="banner">Banner</option>
 										<option value="category">Category</option>
 										<option value="subcategory">Subcategory</option>
 										<option value="product">Product</option>

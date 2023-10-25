@@ -215,16 +215,20 @@
                             <div class="d-flex categori-dropdown-inner">
                                 <ul>
                                     @foreach($categories as $item)
+                                        @if($loop->index < 5)
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('$item->category_image') }}" alt="" /> {{ $item->category_name }} </a>
+                                            <a href="{{ url('product/category/'.$item->id.'/'.$item->category_slug) }}"> <img src="{{ asset('$item->category_image') }}" alt="" /> {{ $item->category_name }} </a>
                                         </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                                 <ul class="end">
                                     @foreach($categories as $item)
+                                        @if($loop->index > 4)
                                         <li>
-                                            <a href="shop-grid-right.html"> <img src="{{ asset('$item->category_image') }}" alt="" /> {{ $item->category_name }} </a>
+                                            <a href="{{ url('product/category/'.$item->id.'/'.$item->category_slug) }}"> <img src="{{ asset('$item->category_image') }}" alt="" /> {{ $item->category_name }} </a>
                                         </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </div>
@@ -275,20 +279,20 @@
                                 <!-- <li>
                                     <a href="page-about.html">About</a>
                                 </li> -->
+                                @foreach($categories as $category)
                                 <li>
-                                    @foreach($categories as $category)
+                                    
                                     <a href="{{ url('product/category/'.$category->id.'/'.$category->category_slug) }}">{{ $category->category_name }} <i class="fi-rs-angle-down"></i></a>
 
                                     @php
                                         $subcategories = App\Models\SubCategory::where('category_id', $category->id)->orderBy('subcategory_name', 'ASC')->get();
                                     @endphp
-
+                                    @foreach($subcategories as $subcategory)
                                     <ul class="sub-menu">
-                                        @foreach($subcategories as $subcategory)
                                         <li>
                                             <a href="{{ url('product/subcategory/'.$subcategory->id.'/'.$subcategory->subcategory_slug) }}">{{ $subcategory->subcategory_name }}</a>
                                         </li>
-                                        @endforeach
+                                        
                                         <!-- <li>
                                             <a href="#">Single Product <i class="fi-rs-angle-right"></i></a>
                                             <ul class="level-menu">
@@ -317,6 +321,7 @@
                                     </ul>
                                     @endforeach
                                 </li>
+                                @endforeach
                                 <!-- <li>
                                     <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
                                     <ul class="sub-menu">
@@ -419,6 +424,9 @@
                                 </li> -->
                                 <li>
                                     <a href="{{ route('home.blog')}}">Blog</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('shop.page')}}">Shop</a>
                                 </li>
                             </ul>
                         </nav>

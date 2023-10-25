@@ -22,6 +22,9 @@ $seo = App\Models\Seo::find(1);
     <meta property="og:image" content="" />
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/assets/imgs/theme/favicon.svg') }}" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
+
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/animate.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css?v=5.3') }}" />
@@ -91,6 +94,7 @@ $seo = App\Models\Seo::find(1);
     <!-- <script src="{{ asset('frontend/assets/js/script.js') }}"></script> -->
 
     <!-- <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
     <script src="{{ asset('frontend/assets/js/plugins/sweetalert2@11.js') }}"></script>
 
     <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script> -->
@@ -431,7 +435,7 @@ $seo = App\Models\Seo::find(1);
                                     </td>
                                     <td class="image product-thumbnail pt-40"><img src="/${value.product.product_thambnail}" alt="#" /></td>
                                     <td class="product-des product-name">
-                                        <h6><a class="product-name mb-10" href="shop-product-right.html">${value.product.product_name}</a></h6>
+                                        <h6><a class="product-name mb-10" href="/product/details/${value.product.id}/${value.product.product_slug}">${value.product.product_name}</a></h6>
                                         <div class="product-rate-cover">
                                             <div class="product-rate d-inline-block">
                                                 <div class="product-rating" style="width: 90%"></div>

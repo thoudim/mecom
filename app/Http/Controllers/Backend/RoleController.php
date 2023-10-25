@@ -27,7 +27,6 @@ class RoleController extends Controller
 
     public function StorePermission(Request $request)
     {
-        // var_dump($request->group_name);die;
         
         $role = Permission::create([
             'name' => $request->name,
@@ -40,7 +39,8 @@ class RoleController extends Controller
             'alert-type' => 'success'
         );
 
-        return redirect()->route('all.permission')->with($notification);
+        // return redirect()->route('all.permission')->with($notification);
+        return redirect()->back()->with($notification);
 
     } // End Method
 

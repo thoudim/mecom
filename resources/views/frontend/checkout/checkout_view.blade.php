@@ -213,8 +213,8 @@
                     dataType: "json",
 
                     success:function(data){
-                        // $('select[name="district_id"]').html('');
-                        $('select[name="state_id"]').html('');
+                        $('select[name="district_id"]').html('');
+                        // $('select[name="state_id"]').html('');
                         var d = $('select[name="district_id"]').empty();
                         $.each(data, function(key,value){
                             $('select[name="district_id"]').append('<option value="'+ value.id + '">' + value.district_name + '</option>');
@@ -232,9 +232,10 @@
     $(document).ready(function(){
         $('select[name="district_id"]').on('change', function(){
             var district_id = $(this).val();
+            
             if(district_id) {
                 $.ajax({
-                    url: "{{ url('/state-get/ajax')}}/"+district_id,
+                    url: "{{ url('/state-get/ajax') }}/"+district_id,
                     type: "GET",
                     dataType: "json",
 
@@ -246,7 +247,7 @@
                         });
                     },
                 });
-            }else{
+            } else{
                 alert('danger');
             }
         });

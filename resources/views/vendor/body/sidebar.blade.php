@@ -26,7 +26,7 @@
 		@if($status === 'active')
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class='bx bx-home-circle'></i>
+				<div class="parent-icon"><i class='lni lni-fresh-juice'></i>
 				</div>
 				<div class="menu-title">Product Manage</div>
 			</a>
@@ -40,7 +40,7 @@
 		
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class="bx bx-folder"></i>
+				<div class="parent-icon"><i class="bx bx-cart"></i>
 				</div>
 				<div class="menu-title">Order Manage</div>
 			</a>
@@ -56,7 +56,7 @@
 				</li>
 			</ul>
 		</li>
-		<li>
+		<!-- <li>
 			<a href="javascript:;" class="has-arrow">
 				<div class="parent-icon"><i class="bx bx-category"></i>
 				</div>
@@ -103,10 +103,10 @@
 				<li> <a href="ecommerce-orders.html"><i class="bx bx-right-arrow-alt"></i>Orders</a>
 				</li>
 			</ul>
-		</li>
+		</li> -->
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class='bx bx-cart'></i>
+				<div class="parent-icon"><i class='lni lni-indent-increase'></i>
 				</div>
 				<div class="menu-title">Review Manage</div>
 			</a>

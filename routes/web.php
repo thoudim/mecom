@@ -26,6 +26,8 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\ShopController;
+
 use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CompareController;
 use App\Http\Controllers\User\CheckoutController;
@@ -128,10 +130,6 @@ Route::post('/vendor/register', [VendorController::class, 'VendorRegister'])->na
 
 
 Route::middleware(['auth','role:admin'])->group(function() {
-
-    // Frontend Home page
-    Route::get('/home', [UserController::class, 'UserHomePage'])->name('frontend.home_page');
-    // End Frontend Home page
 
     // Brand Route
     Route::controller(BrandController::class)->group(function() {
@@ -373,11 +371,17 @@ Route::middleware(['auth','role:admin'])->group(function() {
 
 }); // Admin End Middleware
 
-Route::middleware(['auth','role:vendor'])->group(function() {
-    // Frontend Home page
-    Route::get('/home', [UserController::class, 'UserHomePage'])->name('frontend.home_page');
-    // End Frontend Home page
-});
+// Route::middleware(['auth','role:admin'])->group(function() {
+//     // Frontend Home page
+//     Route::get('/home', [UserController::class, 'UserHomePage'])->name('frontend.home_page');
+//     // End Frontend Home page
+// });
+
+// Route::middleware(['auth','role:vendor'])->group(function() {
+//     // Frontend Home page
+//     Route::get('/home', [UserController::class, 'UserHomePage'])->name('frontend.home_page');
+//     // End Frontend Home page
+// });
 
 // Frontend Product Details All Route
 Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
@@ -419,6 +423,12 @@ Route::controller(BlogController::class)->group(function(){
 Route::controller(IndexController::class)->group(function(){
     Route::post('/search', 'ProductSearch')->name('product.search');
     // Route::post('/search-product', 'SearchProduct');
+});
+
+// Shop page All Route
+Route::controller(ShopController::class)->group(function(){
+    Route::get('/shop', 'ShopPage')->name('shop.page');
+    Route::post('/shop/filter', 'ShopFilter')->name('shop.filter');
 });
 
 /// User All Route

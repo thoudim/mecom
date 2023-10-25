@@ -18,38 +18,50 @@
 				<div class="menu-title">Dashboard</div>
 			</a>
 		</li>
+		@if(Auth::user()->can('brand.menu'))
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class='bx bx-git-branch'></i>
+				<div class="parent-icon"><i class='bx bx-cookie'></i>
 				</div>
-				<div class="menu-title">Branch</div>
+				<div class="menu-title">Brand</div>
 			</a>
 			<ul>
+				@if(Auth::user()->can('brand.list'))
 				<li> <a href="{{ route('all.brand') }}"><i class="bx bx-right-arrow-alt"></i>All Brand</a>
 				</li>
+				@endif
+
+				@if(Auth::user()->can('brand.add'))
 				<li> <a href="{{ route('add.brand') }}"><i class="bx bx-right-arrow-alt"></i>Add Brand</a>
 				</li>
-				
+				@endif
 			</ul>
 		</li>
+		@endif
 
+		@if(Auth::user()->can('category.menu'))
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class="fadeIn animated bx bx-purchase-tag"></i>
+				<div class="parent-icon"><i class="bx bx-category"></i>
 				</div>
 				<div class="menu-title">Category</div>
 			</a>
 			<ul>
+				@if(Auth::user()->can('category.list'))
 				<li> <a href="{{ route('all.category') }}"><i class="bx bx-right-arrow-alt"></i>All Category</a>
 				</li>
+				@endif
+
+				@if(Auth::user()->can('category.add'))
 				<li> <a href="{{ route('add.category') }}"><i class="bx bx-right-arrow-alt"></i>Add Category</a>
-				</li>				
+				</li>
+				@endif			
 			</ul>
 		</li>
-
+		@endif
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class="fadeIn animated bx bx-purchase-tag"></i>
+				<div class="parent-icon"><i class="lni lni-codepen"></i>
 				</div>
 				<div class="menu-title">SubCategory</div>
 			</a>
@@ -61,24 +73,30 @@
 			</ul>
 		</li>
 
+		@if(Auth::user()->can('product.menu'))
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class='bx bx-category'></i>
+				<div class="parent-icon"><i class="lni lni-fresh-juice"></i>
 				</div>
-				<div class="menu-title">Product</div>
+				<div class="menu-title">Product Manage</div>
 			</a>
 			<ul>
-				<li> <a href="{{ route('all.product') }}"><i class="bx bx-right-arrow-alt"></i>All Product</a>
+				@if(Auth::user()->can('product.list'))
+				<li><a href="{{ route('all.product') }}"><i class="bx bx-right-arrow-alt"></i>All Product</a>
 				</li>
-				<li> <a href="{{ route('add.product') }}"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
+				@endif
+
+				@if(Auth::user()->can('product.add'))
+				<li><a href="{{ route('add.product') }}"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
 				</li>
-				
+				@endif
 			</ul>
 		</li>
+		@endif
 
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class="fadeIn animated bx bx-purchase-tag"></i>
+				<div class="parent-icon"><i class="lni lni-gallery"></i>
 				</div>
 				<div class="menu-title">Slider Manage</div>
 			</a>
@@ -92,7 +110,7 @@
 
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class="fadeIn animated bx bx-purchase-tag"></i>
+				<div class="parent-icon"><i class="lni lni-image"></i>
 				</div>
 				<div class="menu-title">Banner Manage</div>
 			</a>
@@ -106,7 +124,7 @@
 
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class="bx bx-category"></i>
+				<div class="parent-icon"><i class="lni lni-invention"></i>
 				</div>
 				<div class="menu-title">Coupon System</div>
 			</a>
@@ -120,7 +138,7 @@
 
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class="bx bx-category"></i>
+				<div class="parent-icon"><i class="lni lni-map"></i>
 				</div>
 				<div class="menu-title">Shipping Area</div>
 			</a>
@@ -130,6 +148,20 @@
 				<li> <a href="{{ route('all.district') }}"><i class="bx bx-right-arrow-alt"></i>All District</a>
 				</li>
 				<li> <a href="{{ route('all.state') }}"><i class="bx bx-right-arrow-alt"></i>All State</a>
+				</li>				
+			</ul>
+		</li>
+
+		<li>
+			<a href="javascript:;" class="has-arrow">
+				<div class="parent-icon"><i class="lni lni-network"></i>
+				</div>
+				<div class="menu-title">Vendor Manage</div>
+			</a>
+			<ul>
+				<li> <a href="{{ route('inactive.vendor') }}"><i class="bx bx-right-arrow-alt"></i>Inactive Vendor</a>
+				</li>
+				<li> <a href="{{ route('active.vendor') }}"><i class="bx bx-right-arrow-alt"></i>Active Vendor</a>
 				</li>				
 			</ul>
 		</li>
@@ -158,7 +190,7 @@
 		<li>
 			<a href="javascript:;" class="has-arrow">
 				<div class="parent-icon">
-					<i class='bx bx-cart'></i>
+					<i class='lni lni-paperclip'></i>
 				</div>
 				<div class="menu-title">Return Order </div>
 			</a>
@@ -179,23 +211,10 @@
 				</div>
 				<div class="menu-title">Widgets</div>
 			</a>
-		</li>
-		<li>
-			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class='bx bx-cart'></i>
-				</div>
-				<div class="menu-title">Vendor Manage</div>
-			</a>
-			<ul>
-				<li> <a href="{{ route('inactive.vendor') }}"><i class="bx bx-right-arrow-alt"></i>Inactive Vendor</a>
-				</li>
-				<li> <a href="{{ route('active.vendor') }}"><i class="bx bx-right-arrow-alt"></i>Active Vendor</a>
-				</li>				
-			</ul>
 		</li> -->
 		<li>
 			<a class="has-arrow" href="javascript:;">
-				<div class="parent-icon"><i class="bx bx-repeat"></i>
+				<div class="parent-icon"><i class="lni lni-stats-up"></i>
 				</div>
 				<div class="menu-title">Reports Manage</div>
 			</a>
@@ -211,7 +230,7 @@
 
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class="bx bx-category"></i>
+				<div class="parent-icon"><i class="lni lni-slideshare"></i>
 				</div>
 				<div class="menu-title">User Manage</div>
 			</a>
@@ -227,7 +246,7 @@
 
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class="bx bx-category"></i>
+				<div class="parent-icon"><i class="lni lni-pyramids"></i>
 				</div>
 				<div class="menu-title">Blog Manage</div>
 			</a>
@@ -243,7 +262,7 @@
 
 		<li>
 			<a href="javascript:;" class="has-arrow">
-				<div class="parent-icon"><i class="bx bx-category"></i>
+				<div class="parent-icon"><i class="lni lni-indent-increase"></i>
 				</div>
 				<div class="menu-title">Review Manage</div>
 			</a>
@@ -258,7 +277,7 @@
 		</li>
 		<li>
 			<a class="has-arrow" href="javascript:;">
-				<div class="parent-icon"> <i class="bx bx-category"></i>
+				<div class="parent-icon"> <i class="lni lni-cog"></i>
 				</div>
 				<div class="menu-title">Setting Manage</div>
 			</a>
@@ -382,7 +401,7 @@
 		</li> -->
 		<li>
 			<a class="has-arrow" href="javascript:;">
-				<div class="parent-icon"><i class="bx bx-category"></i>
+				<div class="parent-icon"><i class="lni lni-cart-full"></i>
 				</div>
 				<div class="menu-title">Stock Manage</div>
 			</a>
@@ -391,23 +410,11 @@
 				</li>
 			</ul>
 		</li>
-		<li>
-			<a class="has-arrow" href="javascript:;">
-				<div class="parent-icon"><i class="bx bx-line-chart"></i>
-				</div>
-				<div class="menu-title">Admin Manage</div>
-			</a>
-			<ul>
-				<li> <a href="{{ route('all.admin') }}"><i class="bx bx-right-arrow-alt"></i>All Admin</a>
-				</li>
-				<li> <a href="{{ route('add.admin') }}"><i class="bx bx-right-arrow-alt"></i>Add Admin</a>
-				</li>
-			</ul>
-		</li>
+		
 		<li class="menu-label">Roles And Permission</li>
 		<li>
 			<a class="has-arrow" href="javascript:;">
-				<div class="parent-icon"><i class="bx bx-line-chart"></i>
+				<div class="parent-icon"><i class="lni lni-users"></i>
 				</div>
 				<div class="menu-title">Role & Permission</div>
 			</a>
@@ -419,6 +426,19 @@
 				<li> <a href="{{ route('add.roles.permission') }}"><i class="bx bx-right-arrow-alt"></i>Roles in Permission</a>
 				</li>
 				<li> <a href="{{ route('all.roles.permission') }}"><i class="bx bx-right-arrow-alt"></i>All Roles in Permission</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a class="has-arrow" href="javascript:;">
+				<div class="parent-icon"><i class="lni lni-user"></i>
+				</div>
+				<div class="menu-title">Admin Manage</div>
+			</a>
+			<ul>
+				<li> <a href="{{ route('all.admin') }}"><i class="bx bx-right-arrow-alt"></i>All Admin</a>
+				</li>
+				<li> <a href="{{ route('add.admin') }}"><i class="bx bx-right-arrow-alt"></i>Add Admin</a>
 				</li>
 			</ul>
 		</li>
