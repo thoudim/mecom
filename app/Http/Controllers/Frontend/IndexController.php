@@ -16,24 +16,28 @@ class IndexController extends Controller
 
     public function Index()
     {
+
+        // $products = new Product();
+        // $product_id = $products->id;
+        // var_dump($product_id);die();
         $skip_category_0 = Category::skip(0)->first();
-        $skip_product_0 = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->limit(5)->get();
+        
+        $skip_product_0 = Product::where('status',1)->where('category_id',optional($skip_category_0)->id)->orderBy('id','DESC')->limit(5)->get();
 
         $skip_category_1 = Category::skip(1)->first();
-        if($skip_category_0->id == 1){
-            
+        
+        if(optional($skip_category_0)->id == 1){
             $skip_product_1 = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->limit(5)->get();
-            
         }else{
-            $skip_product_1 = Product::where('status',1)->where('category_id',$skip_category_1->id)->orderBy('id','DESC')->limit(5)->get();
+            $skip_product_1 = Product::where('status',1)->where('category_id',optional($skip_category_1)->id)->orderBy('id','DESC')->limit(5)->get();
         }
+
         $skip_category_2 = Category::skip(3)->first();
-        // var_dump($skip_category_7);die();
-        if($skip_category_0->id == 1){
+
+        if(optional($skip_category_0)->id == 1){
             $skip_product_2 = Product::where('status',1)->where('category_id',$skip_category_0->id)->orderBy('id','DESC')->limit(5)->get();
-            
         }else{
-            $skip_product_2 = Product::where('status',1)->where('category_id',$skip_category_2->id)->orderBy('id','DESC')->limit(5)->get();
+            $skip_product_2 = Product::where('status',1)->where('category_id',optional($skip_category_2)->id)->orderBy('id','DESC')->limit(5)->get();
         }
 
         $hot_deals = Product::where('hot_deals',1)->where('discount_price','!=',NULL)->orderBy('id','DESC')->limit(3)->get();
@@ -42,7 +46,8 @@ class IndexController extends Controller
         $new = Product::where('status',1)->orderBy('id','DESC')->limit(3)->get();
         $special_deals = Product::where('special_deals',1)->orderBy('id','DESC')->limit(3)->get();
 
-        return view('frontend.index', compact('skip_category_0','skip_product_0','skip_category_2','skip_product_2','skip_category_1','skip_product_1','hot_deals','special_offer','new','special_deals'));
+        return view('frontend.index',compact('skip_category_0','skip_product_0','skip_category_1','skip_product_1','skip_category_2','skip_product_2','hot_deals','special_offer','new','special_deals'));
+
     }// End Method
     
     public function ProductDetails($id, $slug)

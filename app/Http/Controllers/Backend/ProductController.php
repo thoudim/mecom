@@ -208,6 +208,7 @@ class ProductController extends Controller
 
     public function MultiImageDelete($id){
         $oldImg = MultiImg::findOrFail($id);
+        // var_dump($oldImg);die();
         unlink($oldImg->product_image);
 
         MultiImg::findOrFail($id)->delete();
@@ -245,12 +246,17 @@ class ProductController extends Controller
     public function ProductDelete($id){
 
         $product = Product::findOrFail($id);
-        unlink($product->product_thambnail);
+        // var_dump($product);die();
+        // if(!empty($product->product_thambnail)){
+        //     // echo "Hello";
+        //     unlink($product->product_thambnail);
+        // }
+        
         Product::findOrFail($id)->delete();
 
         $images = MultiImg::where('product_id', $id)->get();
         foreach($images as $img){
-            unlink($img->product_image);
+            // unlink($img->product_image);
             MultiImg::where('product_id', $id)->delete();
         }
 

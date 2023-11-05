@@ -46,7 +46,11 @@
 						@foreach($subcategorys as $key => $item)
 						<tr>
 							<td>{{ $key + 1 }}</td>
+							@if(!empty($item['category']))
 							<td>{{ $item['category']['category_name'] }}</td>
+							@else
+							<td></td>
+							@endif
 							<td>{{ $item->subcategory_name }}</td>
 							
 							<td>

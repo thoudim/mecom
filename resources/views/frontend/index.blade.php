@@ -24,7 +24,7 @@
 <section class="product-tabs section-padding position-relative">
     <div class="container">
         <div class="section-title style-2 wow animate__animated animate__fadeIn">
-            <h3>{{ $skip_category_0->category_name }} Category </h3>
+            <h3>{{ optional($skip_category_0)->category_name }} Category </h3>
            
         </div>
         <!--End nav-tabs-->
@@ -129,10 +129,10 @@
     <div class="container">
         <div class="section-title style-2 wow animate__animated animate__fadeIn">
             
-            @if($skip_category_1->id == 0)
+            @if(optional($skip_category_1)->id == 0)
             <h3>T-shirt Category </h3>
             @else
-            <h3>{{ $skip_category_1->category_name }} Category </h3>
+            <h3>{{ optional($skip_category_1)->category_name }} Category </h3>
             @endif
            
         </div>
@@ -217,10 +217,10 @@
 <section class="product-tabs section-padding position-relative">
     <div class="container">
         <div class="section-title style-2 wow animate__animated animate__fadeIn">
-            @if($skip_category_2->id == 0)
+            @if(optional($skip_category_2)->id == 0)
             <h3>Computer Category </h3>
             @else
-            <h3>{{ $skip_category_2->category_name }} Category </h3>
+            <h3>{{ optional($skip_category_2)->category_name }} Category </h3>
             @endif
            
         </div>

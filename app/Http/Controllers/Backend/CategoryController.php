@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Image;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -107,15 +108,18 @@ class CategoryController extends Controller
         }
     }
 
-    public function DeleteCategory($id) {
-        $category = Category::findOrFail($id);
-        $img = $category->category_image;
-        if ($img) {
-            unlink($img);
-        }
+    public function DeleteCategory($id)
+    {
+        // $category = Category::findOrFail($id);
+        $data = DB::table('categories')
+                ->leftjoin('sub_categories', 'categories.id', '=', 'sub_categories.category_id')
+                ->where('categories.id', $id);
+
+        DB::table('sub_categories')->where('category_id', $id)->delete();
+        $data->delete();
         
 
-        Category::findOrFail($id)->delete();
+        // Category::findOrFail($id)->delete();
 
         $notification = array(
             'message' => 'Category Delete Successfully',
